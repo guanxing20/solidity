@@ -1,13 +1,27 @@
-### 0.8.30 (unreleased)
+### 0.8.31 (unreleased)
 
 Language Features:
-
+* Yul: Introduce builtin `clz(x)` for counting the number of leading zero bits in a 256-bit word.
 
 Compiler Features:
+* ethdebug: Experimental support for instructions and source locations under EOF.
+
+Bugfixes:
+* Assembler: Fix not using a fixed-width type for IDs being assigned to subassemblies nested more than one level away, resulting in inconsistent `--asm-json` output between target architectures.
+* Yul Optimizer: Fix edge case in which invalid Yul code is produced by ExpressionSimplifier due to expressions being substituted that contain out-of-scope variables.
+
+Build System:
+* Update minimum version requirements of Boost to 1.83.0 for non-windows builds and of GCC and Clang to 13.3 and 18.1.3, respectively. Fixes infinite recursion on `boost::rational` comparison affecting compiler binaries built with GCC<14.0 and Boost<1.75.
+
+### 0.8.30 (2025-05-07)
+
+Compiler Features:
+* EVM: Set default EVM Version to `prague`.
 * NatSpec: Capture Natspec documentation of `enum` values in the AST.
 
 
 Bugfixes:
+* SMTChecker: Do not consider loop conditions as constant-condition verification target as this could cause incorrect reports and internal compiler errors.
 * SMTChecker: Fix incorrect analysis when only a subset of contracts is selected with `--model-checker-contracts`.
 * SMTChecker: Fix internal compiler error when string literal is used to initialize user-defined type based on fixed bytes.
 

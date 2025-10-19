@@ -69,7 +69,8 @@ then
   cd "$boost_dir"
   ./bootstrap.sh --with-toolset=clang --with-libraries=thread,system,filesystem,program_options,serialization,test
   # the default number of jobs that b2 is taking, is the number of detected available CPU threads.
-  sudo ./b2 -a address-model=64 architecture=arm+x86 install
+  # install boost to /opt/boost, to use it in CMake, specify Boost_ROOT
+  sudo ./b2 -a address-model=64 architecture=arm+x86 --prefix=/opt/boost install
   cd ..
   sudo rm -rf "$boost_dir"
 
@@ -107,10 +108,10 @@ then
   rm -rf "$z3_dir"
 
   # evmone
-  evmone_version="0.13.0"
+  evmone_version="0.16.0"
   evmone_package="evmone-${evmone_version}-darwin-arm64.tar.gz"
-  wget "https://github.com/ethereum/evmone/releases/download/v${evmone_version}/${evmone_package}"
-  validate_checksum "$evmone_package" 49fe6cc35e0e13c48ca2f29a6b85a47f7b25dcd427e14254000d3bc29cddf2a6
+  wget "https://github.com/ipsilon/evmone/releases/download/v${evmone_version}/${evmone_package}"
+  validate_checksum "$evmone_package" d26bcf7ada6c712b669ee70cbd8b534f80dadb6207fa15e15d1517d2b6823aa8
   sudo tar xzpf "$evmone_package" -C /usr/local
   rm "$evmone_package"
 fi

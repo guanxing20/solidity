@@ -21,7 +21,7 @@ include(EthPolicy)
 eth_policy()
 
 # project name and version should be set after cmake_policy CMP0048
-set(PROJECT_VERSION "0.8.30")
+set(PROJECT_VERSION "0.8.31")
 # OSX target needed in order to support std::visit
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.14")
 project(solidity VERSION ${PROJECT_VERSION} LANGUAGES C CXX)
@@ -69,14 +69,6 @@ else ()
 endif()
 
 find_package(Threads)
-
-if ("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin" AND "${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-    if (CMAKE_VERSION VERSION_EQUAL "4.0.0" AND CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL "15.0.0.15000040")
-        # for Apple clang 15 under cmake 4.0.0, disable pedantic warnings explicitly as it fails to treat boost properly as
-        # system library, warnings propagate
-        set(PEDANTIC OFF)
-    endif()
-endif()
 
 if(NOT PEDANTIC)
   message(WARNING "-- Pedantic build flags turned off. Warnings will not make compilation fail. This is NOT recommended in development builds.")

@@ -61,6 +61,7 @@ enum class Instruction: uint8_t
 	SHL,                      ///< bitwise SHL operation
 	SHR,                      ///< bitwise SHR operation
 	SAR,                      ///< bitwise SAR operation
+	CLZ,                      ///< count of leading zeros in binary representation
 
 	KECCAK256 = 0x20,         ///< compute KECCAK-256 hash
 
@@ -322,6 +323,6 @@ InstructionInfo instructionInfo(Instruction _inst, langutil::EVMVersion _evmVers
 bool isValidInstruction(Instruction _inst);
 
 /// Convert from string mnemonic to Instruction type.
-extern const std::map<std::string, Instruction> c_instructions;
+extern const std::map<std::string, Instruction, std::less<>> c_instructions;
 
 }
